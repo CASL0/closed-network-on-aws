@@ -23,6 +23,8 @@
 
 | Name | Type |
 |------|------|
+| [aws_acm_certificate.client](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) | resource |
+| [aws_acm_certificate.server](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) | resource |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
@@ -31,6 +33,9 @@ No inputs.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_acm_client_certificate_arn"></a> [acm\_client\_certificate\_arn](#output\_acm\_client\_certificate\_arn) | クライアント証明書のARN |
+| <a name="output_acm_server_certificate_arn"></a> [acm\_server\_certificate\_arn](#output\_acm\_server\_certificate\_arn) | サーバー証明書のARN |
 <!-- END_TF_DOCS -->
 <!-- prettier-ignore-end -->

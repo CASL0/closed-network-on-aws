@@ -1,12 +1,6 @@
 locals {
-  name     = "closed-network-on-aws"
   azs      = slice(data.aws_availability_zones.available.names, 0, 2)
   vpc_cidr = "10.0.0.0/24"
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-  }
 }
 
 data "aws_availability_zones" "available" {
