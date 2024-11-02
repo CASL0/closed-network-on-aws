@@ -1,11 +1,11 @@
 locals {
-  ca_certificate = file("${path.module}/files/ca.crt")
+  ca_certificate = file("${path.module}/files/vpn/ca.crt")
 
-  server_certificate = file("${path.module}/files/server.crt")
-  server_key         = file("${path.module}/files/server.key")
+  server_certificate = file("${path.module}/files/vpn/server.crt")
+  server_key         = file("${path.module}/files/vpn/server.key")
 
-  client_certificate = file("${path.module}/files/client1.domain.tld.crt")
-  client_key         = file("${path.module}/files/client1.domain.tld.key")
+  client_certificate = file("${path.module}/files/vpn/client.crt")
+  client_key         = file("${path.module}/files/vpn/client.key")
 }
 
 resource "aws_acm_certificate" "server" {
