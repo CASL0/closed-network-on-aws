@@ -39,3 +39,5 @@ terraform.rc
 # pre-commit
 .env
 .python-version
+
+files/vpn
