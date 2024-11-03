@@ -25,8 +25,8 @@ data "aws_iam_policy_document" "s3_vpce_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "aws:SourceVpc"
-      values   = [module.vpc.vpc_id]
+      variable = "aws:SourceVpce"
+      values   = [module.endpoints.endpoints.s3.id]
     }
   }
 }
