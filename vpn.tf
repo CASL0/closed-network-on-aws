@@ -40,14 +40,10 @@ module "security_group" {
 
   vpc_id = module.vpc.vpc_id
 
-  ingress_with_cidr_blocks = [
-    {
-      rule        = "all-icmp"
-      cidr_blocks = "0.0.0.0/0"
-    },
-  ]
+  ingress_rules       = ["all-icmp", "http-80-tcp", "https-443-tcp", "dns-tcp", "dns-udp"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
 
-  egress_rules       = ["all-icmp"]
+  egress_rules       = ["all-all"]
   egress_cidr_blocks = [local.vpc_cidr]
 
   tags = local.tags
