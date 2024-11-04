@@ -1,7 +1,7 @@
 module "s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "${local.name}-bucket"
+  bucket = "www.${var.domain_name}"
 
   force_destroy = true
 
