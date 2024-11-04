@@ -66,6 +66,7 @@ terraform apply
     ```
 
 1.  上記で編集して`downloaded-client-config.ovpn`を VPN クライアントで読み込みプロファイルを追加してください。
+1.  DNS を Route53 にフォワードするために、接続する PC の DNS 設定を[インバウンドエンドポイント](https://ap-northeast-1.console.aws.amazon.com/route53resolver/home?region=ap-northeast-1#/inbound-endpoints)の IP アドレスに修正してください。
 
 <!-- prettier-ignore-start -->
 <!-- BEGIN_TF_DOCS -->
