@@ -7,3 +7,9 @@ locals {
     Environment = "dev"
   }
 }
+
+variable "domain_name" {
+  type        = string
+  description = "ドメイン名"
+  default     = "casl0.github.io"
+}
