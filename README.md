@@ -88,8 +88,10 @@ terraform apply
 |------|--------|---------|
 | <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | n/a |
 | <a name="module_endpoints"></a> [endpoints](#module\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints | n/a |
+| <a name="module_inbound_resolver_endpoints"></a> [inbound\_resolver\_endpoints](#module\_inbound\_resolver\_endpoints) | terraform-aws-modules/route53/aws//modules/resolver-endpoints | n/a |
 | <a name="module_s3"></a> [s3](#module\_s3) | terraform-aws-modules/s3-bucket/aws | n/a |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
+| <a name="module_security_group_inbound_resolver_endpoints"></a> [security\_group\_inbound\_resolver\_endpoints](#module\_security\_group\_inbound\_resolver\_endpoints) | terraform-aws-modules/security-group/aws | ~> 5.0 |
 | <a name="module_security_group_vpc_endpoints"></a> [security\_group\_vpc\_endpoints](#module\_security\_group\_vpc\_endpoints) | terraform-aws-modules/security-group/aws | ~> 5.0 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
