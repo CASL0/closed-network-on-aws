@@ -128,6 +128,7 @@ terraform apply
 |------|-------------|
 | <a name="output_acm_client_certificate_arn"></a> [acm\_client\_certificate\_arn](#output\_acm\_client\_certificate\_arn) | クライアント証明書のARN |
 | <a name="output_acm_server_certificate_arn"></a> [acm\_server\_certificate\_arn](#output\_acm\_server\_certificate\_arn) | サーバー証明書のARN |
+| <a name="output_route53_resolver_endpoint_ip_addresses"></a> [route53\_resolver\_endpoint\_ip\_addresses](#output\_route53\_resolver\_endpoint\_ip\_addresses) | Route53 Inbound EndpointのIPアドレス |
 | <a name="output_vpce_for_s3"></a> [vpce\_for\_s3](#output\_vpce\_for\_s3) | S3用のVPC Endpoint |
 <!-- END_TF_DOCS -->
 <!-- prettier-ignore-end -->
