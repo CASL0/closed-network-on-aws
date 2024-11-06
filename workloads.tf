@@ -81,11 +81,10 @@ module "alb" {
 
   target_groups = {
     s3-endpoints = {
-      name_prefix = "vpce-"
-      protocol    = "HTTP"
-      port        = 80
-      target_type = "ip"
-      target_id   = tolist(module.endpoints.endpoints.s3.subnet_configuration)[0].ipv4
+      name_prefix       = "vpce-"
+      protocol          = "HTTP"
+      target_type       = "ip"
+      create_attachment = false
 
       health_check = {
         interval            = 30
@@ -97,6 +96,14 @@ module "alb" {
         protocol            = "HTTP"
         matcher             = "200,307,405"
       }
+    }
+  }
+
+  additional_target_group_attachments = {
+    for k in range(var.az_count) : k => {
+      target_group_key = "s3-endpoints"
+      target_id        = tolist(module.endpoints.endpoints.s3.subnet_configuration)[k].ipv4
+      port             = 80
     }
   }
 
