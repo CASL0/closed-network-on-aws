@@ -13,3 +13,9 @@ variable "domain_name" {
   description = "ドメイン名"
   default     = "casl0.github.io"
 }
+
+variable "az_count" {
+  type        = number
+  description = "AZ数"
+  default     = 2
+}

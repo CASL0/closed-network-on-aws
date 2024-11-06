@@ -1,5 +1,5 @@
 locals {
-  azs = slice(data.aws_availability_zones.available.names, 0, 2)
+  azs = slice(data.aws_availability_zones.available.names, 0, var.az_count)
 }
 
 data "aws_availability_zones" "available" {
@@ -13,8 +13,9 @@ module "vpc" {
   name = "${local.name}-vpc"
   cidr = local.vpc_cidr
 
-  azs           = local.azs
-  intra_subnets = ["10.0.0.0/27", "10.0.0.32/27", "10.0.0.64/27"]
+  azs = local.azs
+  # 各AZに1サブネット+VPNエンドポイント用のサブネット
+  intra_subnets = [for k in range(var.az_count + 1) : cidrsubnet(local.vpc_cidr, 3, k)]
 
   tags = local.tags
 }
@@ -24,7 +25,7 @@ module "endpoints" {
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.security_group_vpc_endpoints.security_group_id]
-  subnet_ids         = slice(module.vpc.intra_subnets, 0, 2)
+  subnet_ids         = slice(module.vpc.intra_subnets, 0, var.az_count)
 
   endpoints = {
     s3 = {
@@ -62,7 +63,7 @@ module "inbound_resolver_endpoints" {
   direction = "INBOUND"
   protocols = ["Do53", "DoH"]
 
-  subnet_ids = slice(module.vpc.intra_subnets, 0, 2)
+  subnet_ids = slice(module.vpc.intra_subnets, 0, var.az_count)
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.security_group_inbound_resolver_endpoints.security_group_id]

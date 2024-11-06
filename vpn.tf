@@ -55,7 +55,7 @@ module "security_group" {
 
 resource "aws_ec2_client_vpn_network_association" "vpn_to_subnet" {
   client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.default.id
-  subnet_id              = module.vpc.intra_subnets[2]
+  subnet_id              = module.vpc.intra_subnets[var.az_count]
 }
 
 ################################################################################

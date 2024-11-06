@@ -115,6 +115,7 @@ terraform apply
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_az_count"></a> [az\_count](#input\_az\_count) | AZ数 | `number` | `2` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | ドメイン名 | `string` | `"casl0.github.io"` | no |
 
 ## Outputs

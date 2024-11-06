@@ -42,7 +42,7 @@ module "alb" {
   name     = "${local.name}-alb"
   vpc_id   = module.vpc.vpc_id
   internal = true
-  subnets  = slice(module.vpc.intra_subnets, 0, 2)
+  subnets  = slice(module.vpc.intra_subnets, 0, var.az_count)
 
   enable_deletion_protection = false
 
