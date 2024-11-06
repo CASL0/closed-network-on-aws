@@ -2,6 +2,10 @@
 
 閉域網からアクセス可能な AWS 上の Web アプリケーションを構築します。
 
+## 構成
+
+![infra](https://raw.githubusercontent.com/CASL0/closed-network-on-aws/refs/heads/images/infra.svg)
+
 ## Prerequisites
 
 ### Terraform
