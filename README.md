@@ -29,11 +29,13 @@
 ## Usage
 
 1. 上記で生成したサーバーとクライアントの証明書・秘密鍵を以下のパスに配置してください。
-   - `files/vpn/ca.crt`：ルート証明書
-   - `files/vpn/server.crt`：サーバー証明書
-   - `files/vpn/server.key`：サーバー秘密鍵
-   - `files/vpn/client.crt`：クライアント証明書
-   - `files/vpn/client.key`：クライアント秘密鍵
+   - `files/ca.crt`：ルート証明書
+   - `files/vpn/server.crt`：VPN サーバー証明書
+   - `files/vpn/server.key`：VPN サーバー秘密鍵
+   - `files/vpn/client.crt`：VPN クライアント証明書
+   - `files/vpn/client.key`：VPN クライアント秘密鍵
+   - `files/ssl/server.crt`：SSL サーバー証明書
+   - `files/ssl/server.key`：SSL サーバー秘密鍵
 1. 以下のコマンドを実行してください。
 
 ```bash
