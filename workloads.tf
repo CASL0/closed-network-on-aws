@@ -37,7 +37,8 @@ resource "aws_s3_bucket_policy" "vpce_bucket_policy" {
 }
 
 module "alb" {
-  source = "terraform-aws-modules/alb/aws"
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 9.0"
 
   name     = "${local.name}-alb"
   vpc_id   = module.vpc.vpc_id
@@ -73,6 +74,15 @@ module "alb" {
     s3-http = {
       port     = 80
       protocol = "HTTP"
+      forward = {
+        target_group_key = "s3-endpoints"
+      }
+    }
+    s3-https = {
+      port            = 443
+      protocol        = "HTTPS"
+      ssl_policy      = var.ssl_policy
+      certificate_arn = aws_acm_certificate.ssl_server.arn
       forward = {
         target_group_key = "s3-endpoints"
       }

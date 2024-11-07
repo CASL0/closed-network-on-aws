@@ -19,3 +19,9 @@ variable "az_count" {
   description = "AZ数"
   default     = 2
 }
+
+variable "ssl_policy" {
+  type        = string
+  description = "TLS セキュリティポリシー"
+  default     = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+}

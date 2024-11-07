@@ -91,7 +91,7 @@ terraform apply
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | n/a |
+| <a name="module_alb"></a> [alb](#module\_alb) | terraform-aws-modules/alb/aws | ~> 9.0 |
 | <a name="module_endpoints"></a> [endpoints](#module\_endpoints) | terraform-aws-modules/vpc/aws//modules/vpc-endpoints | n/a |
 | <a name="module_inbound_resolver_endpoints"></a> [inbound\_resolver\_endpoints](#module\_inbound\_resolver\_endpoints) | terraform-aws-modules/route53/aws//modules/resolver-endpoints | n/a |
 | <a name="module_s3"></a> [s3](#module\_s3) | terraform-aws-modules/s3-bucket/aws | n/a |
@@ -122,6 +122,7 @@ terraform apply
 |------|-------------|------|---------|:--------:|
 | <a name="input_az_count"></a> [az\_count](#input\_az\_count) | AZ数 | `number` | `2` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | ドメイン名 | `string` | `"casl0.github.io"` | no |
+| <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | TLS セキュリティポリシー | `string` | `"ELBSecurityPolicy-TLS13-1-2-2021-06"` | no |
 
 ## Outputs
 
