@@ -5,12 +5,12 @@
 resource "aws_ec2_client_vpn_endpoint" "default" {
   description = "VPNエンドポイント"
 
-  server_certificate_arn = aws_acm_certificate.server.arn
+  server_certificate_arn = aws_acm_certificate.vpn_server.arn
   client_cidr_block      = "10.0.4.0/22"
 
   authentication_options {
     type                       = "certificate-authentication"
-    root_certificate_chain_arn = aws_acm_certificate.client.arn
+    root_certificate_chain_arn = aws_acm_certificate.vpn_client.arn
   }
 
   connection_log_options {

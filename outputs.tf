@@ -1,10 +1,10 @@
 output "acm_server_certificate_arn" {
-  value       = aws_acm_certificate.server.arn
+  value       = aws_acm_certificate.vpn_server.arn
   description = "サーバー証明書のARN"
 }
 
 output "acm_client_certificate_arn" {
-  value       = aws_acm_certificate.client.arn
+  value       = aws_acm_certificate.vpn_client.arn
   description = "クライアント証明書のARN"
 }
 
