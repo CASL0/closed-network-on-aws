@@ -104,6 +104,7 @@ terraform apply
 
 | Name | Type |
 |------|------|
+| [aws_acm_certificate.ssl_server](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) | resource |
 | [aws_acm_certificate.vpn_client](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) | resource |
 | [aws_acm_certificate.vpn_server](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate) | resource |
 | [aws_ec2_client_vpn_authorization_rule.allow_all_users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_client_vpn_authorization_rule) | resource |
@@ -126,8 +127,8 @@ terraform apply
 
 | Name | Description |
 |------|-------------|
-| <a name="output_acm_client_certificate_arn"></a> [acm\_client\_certificate\_arn](#output\_acm\_client\_certificate\_arn) | クライアント証明書のARN |
-| <a name="output_acm_server_certificate_arn"></a> [acm\_server\_certificate\_arn](#output\_acm\_server\_certificate\_arn) | サーバー証明書のARN |
+| <a name="output_acm_client_certificate_arn"></a> [acm\_client\_certificate\_arn](#output\_acm\_client\_certificate\_arn) | VPNクライアント証明書のARN |
+| <a name="output_acm_server_certificate_arn"></a> [acm\_server\_certificate\_arn](#output\_acm\_server\_certificate\_arn) | VPNサーバー証明書のARN |
 | <a name="output_route53_resolver_endpoint_ip_addresses"></a> [route53\_resolver\_endpoint\_ip\_addresses](#output\_route53\_resolver\_endpoint\_ip\_addresses) | Route53 Inbound EndpointのIPアドレス |
 | <a name="output_vpce_for_s3"></a> [vpce\_for\_s3](#output\_vpce\_for\_s3) | S3用のVPC Endpoint |
 <!-- END_TF_DOCS -->
