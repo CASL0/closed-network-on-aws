@@ -41,3 +41,5 @@ terraform.rc
 .python-version
 
 files/vpn
+files/ssl
+files/ca.crt
