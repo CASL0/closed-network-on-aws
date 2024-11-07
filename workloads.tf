@@ -117,6 +117,14 @@ module "alb" {
     }
   }
 
+  route53_records = {
+    www = {
+      name    = "www.${var.domain_name}"
+      type    = "A"
+      zone_id = aws_route53_zone.private_hosted_zone.zone_id
+    }
+  }
+
   tags = local.tags
 }
 
@@ -130,16 +138,4 @@ resource "aws_route53_zone" "private_hosted_zone" {
   }
 
   tags = local.tags
-}
-
-resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.private_hosted_zone.zone_id
-  name    = "www.${var.domain_name}"
-  type    = "A"
-
-  alias {
-    name                   = module.alb.dns_name
-    zone_id                = module.alb.zone_id
-    evaluate_target_health = true
-  }
 }
