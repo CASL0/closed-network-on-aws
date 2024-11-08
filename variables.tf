@@ -25,3 +25,9 @@ variable "ssl_policy" {
   description = "TLS セキュリティポリシー"
   default     = "ELBSecurityPolicy-TLS13-1-2-2021-06"
 }
+
+variable "additional_repository_read_write_access_arns" {
+  type        = list(string)
+  description = "ECRリポジトリアクセス権を付与するIAM"
+  default     = []
+}

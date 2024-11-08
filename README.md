@@ -123,6 +123,7 @@ terraform apply
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_additional_repository_read_write_access_arns"></a> [additional\_repository\_read\_write\_access\_arns](#input\_additional\_repository\_read\_write\_access\_arns) | ECRリポジトリアクセス権を付与するIAM | `list(string)` | `[]` | no |
 | <a name="input_az_count"></a> [az\_count](#input\_az\_count) | AZ数 | `number` | `2` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | ドメイン名 | `string` | `"casl0.github.io"` | no |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | TLS セキュリティポリシー | `string` | `"ELBSecurityPolicy-TLS13-1-2-2021-06"` | no |
