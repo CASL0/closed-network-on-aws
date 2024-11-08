@@ -17,3 +17,8 @@ output "route53_resolver_endpoint_ip_addresses" {
   value       = module.inbound_resolver_endpoints.route53_resolver_endpoint_ip_addresses
   description = "Route53 Inbound EndpointのIPアドレス"
 }
+
+output "ecr_repository_url" {
+  value       = module.ecr.repository_url
+  description = "ECRのリポジトリURL"
+}
