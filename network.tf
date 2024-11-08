@@ -32,6 +32,16 @@ module "endpoints" {
       service = "s3"
       tags    = local.tags
     },
+    ecr_api = {
+      service             = "ecr.api"
+      private_dns_enabled = true
+      tags                = local.tags
+    },
+    ecr_dkr = {
+      service             = "ecr.dkr"
+      private_dns_enabled = true
+      tags                = local.tags
+    },
   }
 
   tags = local.tags

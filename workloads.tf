@@ -1,3 +1,7 @@
+################################################################################
+# S3
+################################################################################
+
 module "s3" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
@@ -34,6 +38,43 @@ data "aws_iam_policy_document" "s3_vpce_policy" {
 resource "aws_s3_bucket_policy" "vpce_bucket_policy" {
   bucket = module.s3.s3_bucket_id
   policy = data.aws_iam_policy_document.s3_vpce_policy.json
+}
+
+################################################################################
+# ECR
+################################################################################
+
+data "aws_caller_identity" "current" {}
+
+module "ecr" {
+  source = "terraform-aws-modules/ecr/aws"
+
+  repository_name = "${local.name}-ecr-repository"
+  repository_type = "private"
+
+  repository_force_delete = true
+
+  repository_read_write_access_arns = [data.aws_caller_identity.current.arn]
+  create_lifecycle_policy           = true
+  repository_lifecycle_policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1,
+        description  = "Keep last 30 images",
+        selection = {
+          tagStatus     = "tagged",
+          tagPrefixList = ["v"],
+          countType     = "imageCountMoreThan",
+          countNumber   = 30
+        },
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+
+  tags = local.tags
 }
 
 module "alb" {
