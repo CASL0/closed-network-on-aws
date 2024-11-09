@@ -49,7 +49,7 @@ data "aws_caller_identity" "current" {}
 module "ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
-  repository_name = "${local.name}-ecr-repository"
+  repository_name = "${local.name}-webapp"
   repository_type = "private"
 
   repository_force_delete = true
