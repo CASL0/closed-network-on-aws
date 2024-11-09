@@ -128,6 +128,14 @@ module "ecs" {
         }
       }
 
+      load_balancer = {
+        service = {
+          target_group_arn = module.alb.target_groups["ecs"].arn
+          container_name   = "webapp"
+          container_port   = 80
+        }
+      }
+
       subnet_ids = slice(module.vpc.intra_subnets, 0, var.az_count)
 
       security_group_rules = {
@@ -208,6 +216,19 @@ module "alb" {
             }
           }]
         }
+        ecs = {
+          actions = [
+            {
+              type             = "forward"
+              target_group_key = "ecs"
+            }
+          ]
+          conditions = [{
+            host_header = {
+              values = ["app.${var.domain_name}"]
+            }
+          }]
+        }
       }
     }
 
@@ -234,6 +255,19 @@ module "alb" {
             }
           }]
         }
+        ecs = {
+          actions = [
+            {
+              type             = "forward"
+              target_group_key = "ecs"
+            }
+          ]
+          conditions = [{
+            host_header = {
+              values = ["app.${var.domain_name}"]
+            }
+          }]
+        }
       }
     }
   }
@@ -256,6 +290,23 @@ module "alb" {
         matcher             = "200,307,405"
       }
     }
+    ecs = {
+      protocol    = "HTTP"
+      target_type = "ip"
+      # ecs module側でアタッチする
+      create_attachment = false
+
+      health_check = {
+        interval            = 30
+        path                = "/"
+        port                = "traffic-port"
+        healthy_threshold   = 3
+        unhealthy_threshold = 3
+        timeout             = 6
+        protocol            = "HTTP"
+        matcher             = "200"
+      }
+    }
   }
 
   additional_target_group_attachments = {
@@ -269,6 +320,11 @@ module "alb" {
   route53_records = {
     www = {
       name    = "www.${var.domain_name}"
+      type    = "A"
+      zone_id = aws_route53_zone.private_hosted_zone.zone_id
+    }
+    app = {
+      name    = "app.${var.domain_name}"
       type    = "A"
       zone_id = aws_route53_zone.private_hosted_zone.zone_id
     }
