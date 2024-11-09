@@ -77,6 +77,81 @@ module "ecr" {
   tags = local.tags
 }
 
+################################################################################
+# ECS
+################################################################################
+
+module "ecs" {
+  source = "terraform-aws-modules/ecs/aws"
+
+  cluster_name = "${local.name}-cluster"
+
+  fargate_capacity_providers = {
+    FARGATE = {
+      name = "FARGATE"
+    }
+  }
+
+  services = {
+    webapp = {
+      cpu    = 1024
+      memory = 2048
+
+      container_definitions = {
+        webapp = {
+          cpu       = 512
+          memory    = 1024
+          essential = true
+          image     = "${module.ecr.repository_url}:v1"
+          port_mappings = [
+            {
+              name          = "webapp-80"
+              containerPort = 80
+              protocol      = "tcp"
+            }
+          ]
+
+          readonly_root_filesystem = true
+        }
+      }
+
+      service_connect_configuration = {
+        enable    = true
+        namespace = aws_service_discovery_http_namespace.default.arn
+        service = {
+          client_alias = {
+            port     = 80
+            dns_name = "webapp"
+          }
+          port_name      = "webapp-80"
+          discovery_name = "webapp-svc"
+        }
+      }
+
+      subnet_ids = slice(module.vpc.intra_subnets, 0, var.az_count)
+
+      security_group_rules = {
+        alb_ingress_3000 = {
+          type                     = "ingress"
+          from_port                = 80
+          to_port                  = 80
+          protocol                 = "tcp"
+          description              = "Service port"
+          source_security_group_id = module.alb.security_group_id
+        }
+      }
+    }
+  }
+
+  tags = local.tags
+}
+
+resource "aws_service_discovery_http_namespace" "default" {
+  name        = "${local.name}-ns"
+  description = "CloudMap namespace for ${local.name}"
+  tags        = local.tags
+}
+
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 9.0"
