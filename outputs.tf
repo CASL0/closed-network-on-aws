@@ -14,7 +14,7 @@ output "vpce_for_s3" {
 }
 
 output "route53_resolver_endpoint_ip_addresses" {
-  value       = module.inbound_resolver_endpoints.route53_resolver_endpoint_ip_addresses
+  value       = join(",", [for v in module.inbound_resolver_endpoints.route53_resolver_endpoint_ip_addresses : v.ip])
   description = "Route53 Inbound EndpointのIPアドレス"
 }
 
