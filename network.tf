@@ -56,6 +56,8 @@ module "security_group_vpc_endpoints" {
 
   vpc_id = module.vpc.vpc_id
 
+  # S3へのアクセス用に80
+  # ECRへのアクセス用に443
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
   ingress_cidr_blocks = [local.vpc_cidr]
 
