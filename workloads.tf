@@ -187,20 +187,53 @@ module "alb" {
   }
 
   listeners = {
-    s3-http = {
+    http = {
       port     = 80
       protocol = "HTTP"
       forward = {
         target_group_key = "s3-endpoints"
       }
+
+      rules = {
+        s3 = {
+          actions = [
+            {
+              type             = "forward"
+              target_group_key = "s3-endpoints"
+            }
+          ]
+          conditions = [{
+            host_header = {
+              values = ["www.${var.domain_name}"]
+            }
+          }]
+        }
+      }
     }
-    s3-https = {
+
+    https = {
       port            = 443
       protocol        = "HTTPS"
       ssl_policy      = var.ssl_policy
       certificate_arn = aws_acm_certificate.ssl_server.arn
       forward = {
         target_group_key = "s3-endpoints"
+      }
+
+      rules = {
+        s3 = {
+          actions = [
+            {
+              type             = "forward"
+              target_group_key = "s3-endpoints"
+            }
+          ]
+          conditions = [{
+            host_header = {
+              values = ["www.${var.domain_name}"]
+            }
+          }]
+        }
       }
     }
   }
