@@ -46,6 +46,8 @@ resource "aws_s3_bucket_policy" "vpce_bucket_policy" {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_region" "current" {}
+
 module "ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
@@ -75,6 +77,23 @@ module "ecr" {
   })
 
   tags = local.tags
+}
+
+data "aws_iam_policy_document" "ecr_pull_policy" {
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["arn:aws:s3:::prod-${data.aws_region.current.name}-starport-layer-bucket/*"]
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+  }
+}
+
+resource "aws_vpc_endpoint_policy" "vpce_ecr_policy" {
+  vpc_endpoint_id = module.endpoints.endpoints.s3_gateway.id
+  policy          = data.aws_iam_policy_document.ecr_pull_policy.json
 }
 
 ################################################################################
@@ -139,13 +158,20 @@ module "ecs" {
       subnet_ids = slice(module.vpc.intra_subnets, 0, var.az_count)
 
       security_group_rules = {
-        alb_ingress_3000 = {
+        alb_ingress = {
           type                     = "ingress"
           from_port                = 80
           to_port                  = 80
           protocol                 = "tcp"
           description              = "Service port"
           source_security_group_id = module.alb.security_group_id
+        }
+        egress = {
+          type        = "egress"
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
+          cidr_blocks = ["0.0.0.0/0"]
         }
       }
     }

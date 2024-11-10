@@ -42,6 +42,17 @@ module "endpoints" {
       private_dns_enabled = true
       tags                = local.tags
     },
+    s3_gateway = {
+      service         = "s3"
+      service_type    = "Gateway"
+      route_table_ids = module.vpc.intra_route_table_ids
+      tags            = local.tags
+    },
+    logs = {
+      service             = "logs"
+      private_dns_enabled = true
+      tags                = local.tags
+    },
   }
 
   tags = local.tags
