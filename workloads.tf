@@ -91,11 +91,6 @@ data "aws_iam_policy_document" "ecr_pull_policy" {
   }
 }
 
-resource "aws_vpc_endpoint_policy" "vpce_ecr_policy" {
-  vpc_endpoint_id = module.endpoints.endpoints.s3_gateway.id
-  policy          = data.aws_iam_policy_document.ecr_pull_policy.json
-}
-
 ################################################################################
 # ECS
 ################################################################################
