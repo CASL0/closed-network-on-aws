@@ -100,6 +100,10 @@ resource "aws_vpc_endpoint_policy" "vpce_ecr_policy" {
 # ECS
 ################################################################################
 
+locals {
+  dkr_registry = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com"
+}
+
 module "ecs" {
   source = "terraform-aws-modules/ecs/aws"
 
@@ -121,7 +125,7 @@ module "ecs" {
           cpu       = 512
           memory    = 1024
           essential = true
-          image     = "${module.ecr.repository_url}:v1"
+          image     = "${local.dkr_registry}/${local.name}-webapp:v1"
           port_mappings = [
             {
               name          = "webapp-80"
@@ -176,6 +180,8 @@ module "ecs" {
       }
     }
   }
+
+  depends_on = [module.ecr]
 
   tags = local.tags
 }
