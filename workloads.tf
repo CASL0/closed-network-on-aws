@@ -17,24 +17,6 @@ module "s3" {
   tags = local.tags
 }
 
-data "aws_iam_policy_document" "s3_vpce_policy" {
-  statement {
-    actions   = ["s3:GetObject"]
-    resources = ["${module.s3.s3_bucket_arn}/*"]
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:SourceVpce"
-      values   = [module.endpoints.endpoints.s3.id]
-    }
-  }
-}
-
 resource "aws_s3_bucket_policy" "vpce_bucket_policy" {
   bucket = module.s3.s3_bucket_id
   policy = data.aws_iam_policy_document.s3_vpce_policy.json
@@ -77,18 +59,6 @@ module "ecr" {
   })
 
   tags = local.tags
-}
-
-data "aws_iam_policy_document" "ecr_pull_policy" {
-  statement {
-    actions   = ["s3:GetObject"]
-    resources = ["arn:aws:s3:::prod-${data.aws_region.current.name}-starport-layer-bucket/*"]
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
-    }
-  }
 }
 
 ################################################################################

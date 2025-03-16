@@ -46,7 +46,7 @@ module "endpoints" {
       service         = "s3"
       service_type    = "Gateway"
       route_table_ids = module.vpc.intra_route_table_ids
-      policy          = data.aws_iam_policy_document.ecr_pull_policy.json
+      policy          = data.aws_iam_policy_document.dkr_image_layer_pull_policy.json
       tags            = local.tags
     },
     logs = {
