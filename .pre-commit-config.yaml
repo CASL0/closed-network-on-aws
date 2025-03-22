@@ -1,9 +1,16 @@
 repos:
-  - repo: https://github.com/terraform-docs/terraform-docs
-    rev: "v0.19.0"
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
     hooks:
-      - id: terraform-docs-system
-        name: terraform-docs
-        language: system
-        entry: terraform-docs
-        args: ["markdown", "table", "--output-file", "README.md", "."]
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.97.4
+    hooks:
+      - id: terraform_fmt
+        files: \.tf$
+      - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+        files: \.tf$
