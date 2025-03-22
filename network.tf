@@ -21,7 +21,8 @@ module "vpc" {
 }
 
 module "endpoints" {
-  source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+  source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+  version = "~> 5.0"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.security_group_vpc_endpoints.security_group_id]
@@ -81,7 +82,8 @@ module "security_group_vpc_endpoints" {
 ################################################################################
 
 module "inbound_resolver_endpoints" {
-  source = "terraform-aws-modules/route53/aws//modules/resolver-endpoints"
+  source  = "terraform-aws-modules/route53/aws//modules/resolver-endpoints"
+  version = "~> 5.0"
 
   name      = "${local.name}-resolver"
   direction = "INBOUND"

@@ -3,7 +3,8 @@
 ################################################################################
 
 module "s3" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 4.0"
 
   bucket = "www.${var.domain_name}"
 
@@ -31,7 +32,8 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 module "ecr" {
-  source = "terraform-aws-modules/ecr/aws"
+  source  = "terraform-aws-modules/ecr/aws"
+  version = "~> 2.0"
 
   repository_name = "${local.name}-webapp"
   repository_type = "private"
@@ -70,7 +72,8 @@ locals {
 }
 
 module "ecs" {
-  source = "terraform-aws-modules/ecs/aws"
+  source  = "terraform-aws-modules/ecs/aws"
+  version = "~> 5.0"
 
   cluster_name = "${local.name}-cluster"
 
