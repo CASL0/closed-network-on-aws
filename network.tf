@@ -8,7 +8,7 @@ data "aws_availability_zones" "available" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = "${local.name}-vpc"
   cidr = local.vpc_cidr
@@ -22,7 +22,7 @@ module "vpc" {
 
 module "endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.security_group_vpc_endpoints.security_group_id]
