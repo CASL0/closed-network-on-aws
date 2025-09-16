@@ -162,7 +162,7 @@ resource "aws_service_discovery_http_namespace" "default" {
 
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 9.0"
+  version = "~> 10.0"
 
   name     = "${local.name}-alb"
   vpc_id   = module.vpc.vpc_id
