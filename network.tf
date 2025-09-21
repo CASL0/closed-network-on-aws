@@ -83,7 +83,7 @@ module "security_group_vpc_endpoints" {
 
 module "inbound_resolver_endpoints" {
   source  = "terraform-aws-modules/route53/aws//modules/resolver-endpoints"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name      = "${local.name}-resolver"
   direction = "INBOUND"
