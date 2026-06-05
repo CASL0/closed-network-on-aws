@@ -33,7 +33,7 @@ resource "aws_ec2_client_vpn_endpoint" "default" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name        = "security group for vpn endpoint"
   description = "Security group that allows traffic to and from vpc"
