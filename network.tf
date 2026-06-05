@@ -62,7 +62,7 @@ module "endpoints" {
 
 module "security_group_vpc_endpoints" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name        = "security group for vpc endpoint"
   description = "Security group that allows traffic to vpc endpoint"
@@ -101,7 +101,7 @@ module "inbound_resolver_endpoints" {
 
 module "security_group_inbound_resolver_endpoints" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name        = "security group for inbound resolver endpoint"
   description = "Security group that allows traffic to inbound resolver endpoint"
